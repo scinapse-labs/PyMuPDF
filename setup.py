@@ -1443,6 +1443,9 @@ else:
             print(f'OpenBSD: pip install of swig does not build; assuming `pkg_add swig`.')
         elif PYMUPDF_SETUP_SWIG:
             pass
+        elif darwin and python_version_tuple < (3, 13):
+            # Latest swig-4.4.1 gives director errors on macos with python<3.13.
+            ret.append('swig==4.3.1')
         else:
             ret.append('swig')
         return ret
